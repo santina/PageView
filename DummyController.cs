@@ -29,23 +29,8 @@ namespace SwipeDemo
             
         }
 
-
-        private void AddNavigationBarOptions()
-        {
-
-            var optionsNavBarButton = new UIBarButtonItem(UIImage.FromBundle("Images"), UIBarButtonItemStyle.Plain, delegate
-            {
-                var localizedOption = NSBundle.MainBundle.LocalizedString("Options", "Customize your app experience");
-
-            });
-
-
-            NavigationItem.SetLeftBarButtonItem(optionsNavBarButton, true);
-        }
-
         public override void ViewDidAppear(bool animated)
         {
-            AddNavigationBarOptions();
             NavigationItem.Title = "I'm a dumdum";
         }
 
