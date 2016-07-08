@@ -8,7 +8,7 @@ namespace SwipeDemo
 	[Register("AppDelegate")]
 	public class AppDelegate : UIApplicationDelegate
 	{
-		// class-level declarations
+        UIPageViewController pageViewController;
 
 		public override UIWindow Window
 		{
@@ -18,13 +18,40 @@ namespace SwipeDemo
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
-			// If not required for your application you can safely delete this method
+            // Override point for customization after application launch.
+            // If not required for your application you can safely delete this method
 
-			return true;
+            var dummy = new DummyController(); 
+
+            pageViewController = new UIPageViewController(UIPageViewControllerTransitionStyle.PageCurl, UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation.None, 0);
+            pageViewController.SetViewControllers(new[] { new DummyController() }, UIPageViewControllerNavigationDirection.Forward, true, null);
+            pageViewController.DataSource = new MessageDataSource();
+            pageViewController.AutomaticallyAdjustsScrollViewInsets = false;
+
+            //var navigationController = new MyNavigationController(dummy);  // The title shows up
+            var navigationController = new MyNavigationController(pageViewController); // The title doesn't show up
+
+            Window.RootViewController = navigationController;
+
+            Window.MakeKeyAndVisible();
+            return true;
 		}
 
-		public override void OnResignActivation(UIApplication application)
+
+        public class MessageDataSource : UIPageViewControllerDataSource
+        {
+            public override UIViewController GetNextViewController(UIPageViewController pageViewController, UIViewController referenceViewController)
+            {
+                return new DummyController();
+            }
+
+            public override UIViewController GetPreviousViewController(UIPageViewController pageViewController, UIViewController referenceViewController)
+            {
+                return new DummyController();
+            }
+        }
+
+        public override void OnResignActivation(UIApplication application)
 		{
 			// Invoked when the application is about to move from active to inactive state.
 			// This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) 
