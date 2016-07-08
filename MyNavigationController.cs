@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UIKit;
+﻿using UIKit;
 
 namespace SwipeDemo
 {
-    class MyNavigationController : UINavigationController
+    internal class MyNavigationController : UINavigationController
     {
-
         /// <summary>
         /// Constructs a BumblebeeNavigationController with a root view controller.
         /// </summary>
@@ -21,6 +17,5 @@ namespace SwipeDemo
             NavigationBar.TintColor = UIColor.White; // Set text to white.
             NavigationBar.ShadowImage = new UIImage(); // Remove shadow under navigation bar.
         }
-
     }
 }
